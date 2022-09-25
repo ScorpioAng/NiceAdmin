@@ -36,6 +36,7 @@ def ViewAddEmp():
 
 @app.route("/templates/view-employee.html", methods=['GET'])
 def ViewViewEmp():
+    ReadEmp()
     return render_template('view-employee.html')
 
 @app.route("/templates/add-employee.html", methods=['POST'])
