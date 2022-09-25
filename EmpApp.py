@@ -34,7 +34,7 @@ def home():
 def ViewAddEmp():
     return render_template('add-employee.html')
 
-@app.route("add-employee.html", methods=['POST'])
+@app.route("/templates/add-employee.html", methods=['POST'])
 def AddEmp():
     emp_id = request.form['emp_id']
     emp_email = request.form['emp_email']
@@ -94,7 +94,7 @@ def AddEmp():
         cursor.close()
 
     print("all modification done...")
-    return render_template('add-employee-output.html', name="emp_name")
+    return render_template('/templates/add-employee-output.html', name="emp_name")
 
 
 @app.route("/reademp", methods=['GET','POST'])
