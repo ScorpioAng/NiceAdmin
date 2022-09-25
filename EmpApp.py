@@ -104,17 +104,19 @@ def AddEmp():
 def ReadEmp():
     read_sql  = "SELECT * FROM employee"
     cursor = db_conn.cursor()
+    print("testing")
 
     try:
         cursor.execute(read_sql)
         db_conn.commit()
         data = cursor.fetchall()
-        return render_template('view-employee.html', headings = headings, data = data)
+
 
     except Exception as e: 
         return str(e)
     finally:
         cursor.close()
+    return render_template('view-employee.html', headings = headings, data = data)
 
 
 @app.route("/removeemp", methods=['GET','POST'])
