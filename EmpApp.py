@@ -90,7 +90,7 @@ def AddEmp():
         cursor.close()
 
     print("all modification done...")
-    return render_template('add-employee.html')
+    return render_template('templates/add-employee.html')
 
 
 @app.route("/reademp", methods=['GET','POST'])
