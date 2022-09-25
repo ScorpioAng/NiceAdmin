@@ -31,8 +31,8 @@ def home():
     return render_template('index.html')
 
 @app.route("/templates/add-employee.html", methods=['GET'])
-    def ViewEmp():
-        return render_template('add-employee.html')
+def ViewEmp():
+    return render_template('add-employee.html')
 
 @app.route("/templates/add-employee.html", methods=['GET','POST'])
 def AddEmp():
