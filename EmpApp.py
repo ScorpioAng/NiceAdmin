@@ -34,6 +34,10 @@ def home():
 def ViewAddEmp():
     return render_template('add-employee.html')
 
+@app.route("/templates/view-employee.html", methods=['GET'])
+def ViewViewEmp():
+    return render_template('view-employee.html')
+
 @app.route("/templates/add-employee.html", methods=['POST'])
 def AddEmp():
     emp_id= request.form['emp_id']
