@@ -32,7 +32,7 @@ def home():
 
 @app.route("/templates/add-employee.html", methods=['GET'])
 def ViewAddEmp():
-    return render_template('add-employee.html')
+    return render_template('templates/add-employee.html')
 
 @app.route("/templates/add-employee.html", methods=['POST'])
 def AddEmp():
@@ -94,7 +94,7 @@ def AddEmp():
         cursor.close()
 
     print("all modification done...")
-    return render_template('/templates/add-employee-output.html', name="emp_name")
+    return render_template('templates/add-employee-output.html', name="emp_name")
 
 
 @app.route("/reademp", methods=['GET','POST'])
