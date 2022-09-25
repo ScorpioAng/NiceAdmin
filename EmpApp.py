@@ -62,6 +62,7 @@ def AddEmp():
         s3 = boto3.resource('s3')
 
         try:
+            print("%s,%s,%s,%s,%s,%s,%s,%s,%s", emp_id, emp_email, emp_name, emp_DoB, emp_contact, emp_department,emp_address, emp_image, emp_resume)
             print("Data inserted in MySQL RDS... uploading image to S3...")
             s3.Bucket(custombucket).put_object(Key=emp_image_file_name_in_s3, Body=emp_image)
             s3.Bucket(custombucket).put_object(Key=emp_resume_file_name_in_s3, Body=emp_resume)
@@ -84,7 +85,7 @@ def AddEmp():
                 custombucket,
                 emp_resume_file_name_in_s3)
 
-            cursor.execute(insert_sql, (emp_id, emp_email, emp_name, emp_DoB, emp_contact, emp_department, emp_address, image_object_url,resume_object_url))
+            cursor.execute(insert_sql, (emp_id, emp_email, emp_name, emp_DoB, emp_contact, emp_department, emp_address, image_object_url, resume_object_url))
             db_conn.commit()
 
         except Exception as e:
