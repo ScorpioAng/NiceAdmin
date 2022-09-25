@@ -36,6 +36,7 @@ def ViewAddEmp():
 
 @app.route("/templates/add-employee.html", methods=['POST'])
 def AddEmp():
+    emp_id= request.form['emp_id']
     emp_email = request.form['emp_email']
     emp_name = request.form['emp_name']
     emp_DoB = request.form['emp_DoB']
@@ -45,7 +46,7 @@ def AddEmp():
     emp_image = request.files['emp_image']
     emp_resume = request.files['emp_resume']        
 
-    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
     cursor = db_conn.cursor()
 
     if emp_image.filename == "":
@@ -83,7 +84,7 @@ def AddEmp():
                 custombucket,
                 emp_resume_file_name_in_s3)
 
-            cursor.execute(insert_sql, (emp_email, emp_name, emp_DoB, emp_contact, emp_department, emp_address, image_object_url,resume_object_url))
+            cursor.execute(insert_sql, (emp_id, emp_email, emp_name, emp_DoB, emp_contact, emp_department, emp_address, image_object_url,resume_object_url))
             db_conn.commit()
 
         except Exception as e:
