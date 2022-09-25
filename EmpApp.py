@@ -100,7 +100,7 @@ def AddEmp():
     return render_template('add-employee-output.html', name=emp_name)
 
 
-@app.route("/reademp", methods=['GET','POST'])
+@app.route("/templates/view-employee.html", methods=['GET','POST'])
 def ReadEmp():
     read_sql  = "SELECT * FROM employee"
     cursor = db_conn.cursor()
@@ -109,7 +109,7 @@ def ReadEmp():
         cursor.execute(read_sql)
         db_conn.commit()
         data = cursor.fetchall()
-        return render_template('GetEmpOutput.html', headings = headings, data = data)
+        return render_template('view-employee.html', headings = headings, data = data)
 
     except Exception as e: 
         return str(e)
