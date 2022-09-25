@@ -79,12 +79,12 @@ def AddEmp():
                 custombucket,
                 emp_image_file_name_in_s3)
 
-            image_object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
+            resume_object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
                 s3_location,
                 custombucket,
                 emp_resume_file_name_in_s3)
 
-            cursor.execute(insert_sql, (emp_id, emp_email, emp_email, emp_name, emp_DoB, emp_contact, emp_department, emp_address, emp_image_file_name_in_s3,emp_resume_file_name_in_s3))
+            cursor.execute(insert_sql, (emp_id, emp_email, emp_email, emp_name, emp_DoB, emp_contact, emp_department, emp_address, image_object_url,resume_object_url))
             db_conn.commit()
 
         except Exception as e:
