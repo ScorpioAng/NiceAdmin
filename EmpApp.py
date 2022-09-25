@@ -30,6 +30,24 @@ headings=("emp_id","emp_email","emp_name","emp_DoB","emp_contact", "emp_departme
 def home():
     return render_template('index.html')
 
+@app.route("/templates/view-employee.html", methods=['GET','POST'])
+def ReadEmp():
+    read_sql  = "SELECT * FROM employee"
+    cursor = db_conn.cursor()
+    print("testing")
+
+    try:
+        cursor.execute(read_sql)
+        db_conn.commit()
+        data = cursor.fetchall()
+
+
+    except Exception as e: 
+        return str(e)
+    finally:
+        cursor.close()
+    return render_template('view-employee.html', headings = headings, data = data)
+
 @app.route("/templates/add-employee.html", methods=['GET'])
 def ViewAddEmp():
     return render_template('add-employee.html')
@@ -101,23 +119,7 @@ def AddEmp():
     return render_template('add-employee-output.html', name=emp_name)
 
 
-@app.route("/templates/view-employee.html", methods=['GET','POST'])
-def ReadEmp():
-    read_sql  = "SELECT * FROM employee"
-    cursor = db_conn.cursor()
-    print("testing")
 
-    try:
-        cursor.execute(read_sql)
-        db_conn.commit()
-        data = cursor.fetchall()
-
-
-    except Exception as e: 
-        return str(e)
-    finally:
-        cursor.close()
-    return render_template('view-employee.html', headings = headings, data = data)
 
 
 @app.route("/removeemp", methods=['GET','POST'])
