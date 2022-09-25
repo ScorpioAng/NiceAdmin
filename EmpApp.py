@@ -30,6 +30,10 @@ headings=("emp_id","emp_email","emp_name","emp_DoB","emp_contact", "emp_departme
 def home():
     return render_template('index.html')
 
+@app.route("/templates/add-employee.html", methods=['GET'])
+    def ViewEmp():
+        return render_template('add-employee.html')
+
 @app.route("/templates/add-employee.html", methods=['GET','POST'])
 def AddEmp():
     emp_id = request.form['emp_id']
