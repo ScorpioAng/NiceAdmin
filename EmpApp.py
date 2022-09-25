@@ -83,7 +83,6 @@ def AddEmp():
                 s3_location,
                 custombucket,
                 emp_resume_file_name_in_s3)
-
             cursor.execute(insert_sql, (emp_id, emp_email, emp_name, emp_DoB, emp_contact, emp_department, emp_address, image_object_url, resume_object_url))
             db_conn.commit()
 
@@ -94,7 +93,7 @@ def AddEmp():
         cursor.close()
 
     print("all modification done...")
-    return render_template('add-employee-output.html', name="emp_name")
+    return render_template('add-employee-output.html', name=emp_name)
 
 
 @app.route("/reademp", methods=['GET','POST'])
