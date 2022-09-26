@@ -157,7 +157,11 @@
                           <td>{{ row[3] }}</td>
                           <td>{{ row[4] }}</td>
                           <td>{{ row[5] }}</td> 
-                          <td><a href="/templates/remove-leave.html/{{row[0]}}">Delete Leave</a></td>
+                          <td><a href="/templates/remove-leave.html/{{row[0]}}">Delete Leave</a>
+                            <a href="/templates/update-leave.html/{{row[0]}}">Update Leave</a>
+                            <br>
+                        </td>
+                          
                       </tr>
                       {% endfor %}
                   </tbody>
