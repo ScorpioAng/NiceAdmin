@@ -218,8 +218,8 @@ def SearchLeave(leave_id):
         db_conn.commit()
         row = cursor.fetchone() 
             
-    except Exception as e: 
-        print(str(e))
+         except Exception as e: 
+          print(str(e))
     finally:
         cursor.close()
     return render_template('update-leave.html',row = row)
