@@ -346,7 +346,7 @@ def UpdatePayroll(payroll_emp_name):
 
 
       
-    update_sql = ("UPDATE leaveApp SET payroll_month=%s, payroll_salary=%s, payroll_overtime=%s   WHERE payroll_emp_name=%s")
+    update_sql = ("UPDATE payroll SET payroll_month=%s, payroll_salary=%s, payroll_overtime=%s   WHERE payroll_emp_name=%s")
     cursor = db_conn.cursor()
             
     
