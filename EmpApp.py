@@ -171,6 +171,26 @@ def RemoveLeave(leave_id):
     flash("Leave Successfully Removed")
     return render_template('remove-leave.html', name = leave_id)    
 
+@app.route("/templates/remove-payroll.html/<payroll_id>", methods=['GET','POST'])
+def RemoveLeave(payroll_id):
+    cursor = db_conn.cursor()
+
+    try:
+        remove_sql =("DELETE FROM leaveApp WHERE payroll_id= %s")
+        cursor.execute(remove_sql,payroll_id)
+        db_conn.commit()
+
+    except Exception as e: 
+        print (str(e))
+    finally:
+        cursor.close()
+
+    flash("Payroll Successfully Removed")
+    return render_template('remove-payroll.html', name = payroll_id)    
+
+
+
+
 @app.route("/templates/update-employee.html/<emp_id>", methods=['GET'])
 def SearchEmp(emp_id):
 
