@@ -132,7 +132,7 @@ def ReadPayroll():
 
 
 @app.route("/templates/remove-employee.html/<emp_id>", methods=['GET','POST'])
-def RemoveEmp(emp_id):
+def RemovePayroll(emp_id):
     cursor = db_conn.cursor()
 
     try:
