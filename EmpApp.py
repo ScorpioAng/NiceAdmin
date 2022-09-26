@@ -44,7 +44,22 @@ def home():
         return str(e)
     finally:
         cursor.close()
-    return render_template('index.html', headings = headings, data = data)
+    
+    read_sql  = "SELECT * FROM leaveApp"
+    cursor = db_conn.cursor()
+    print("testing")
+
+    try:
+        cursor.execute(read_sql)
+        db_conn.commit()
+        data1 = cursor.fetchall()
+
+
+    except Exception as e: 
+        return str(e)
+    finally:
+        cursor.close()        
+    return render_template('index.html', headings = headings, data = data, headings1 = headings1, data1 = data1)
 
 @app.route("/templates/view-employee.html", methods=['GET'])
 def ReadEmp():
