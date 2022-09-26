@@ -78,7 +78,24 @@ def RemoveEmp(emp_id):
     flash("Employee Successfully Removed")
     return render_template('remove-employee.html', name = removeTarget)
 
-@app.route("/templates/update-employee.html/<emp_id>", methods=['GET','POST'])
+@app.route("/templates/update-employee.html/<emp_id>", methods=['GET'])
+def SearchEmp(emp_id):
+
+    search_sql =("SELECT * FROM employee WHERE emp_id = %s")
+    cursor = db_conn.cursor()
+    try: 
+        cursor.execute(search_sql,emp_id)
+        db_conn.commit()
+        row = cursor.fetchone() 
+            
+    except Exception as e: 
+        print(str(e))
+    finally:
+        cursor.close()
+    return render_template('update-employee.html',row = row)
+
+
+@app.route("/templates/update-employee.html/<emp_id>", methods=['POST'])
 def UpdateEmp(emp_id):
     emp_email = request.form['emp_email']
     emp_name = request.form['emp_name']
@@ -229,28 +246,6 @@ def AddEmp():
 
 
 
-@app.route("/searchemp", methods=['GET','POST'])
-def SearchEmp():
-    emp_id = request.form['emp_id']
-
-    search_sql =("SELECT * FROM employee WHERE emp_id = %s")
-    cursor = db_conn.cursor()
-
-    if emp_id =="": 
-        return "Please enter Employee ID"
-        
-    try: 
-        cursor.execute(search_sql,emp_id)
-        db_conn.commit()
-        row = cursor.fetchone()
-        if row: 
-            return render_template('UpdateEmpOutput.html',row = row)
-        else:
-            return "ID Not Found"
-    except Exception as e: 
-        print(e)
-    finally:
-        cursor.close()
 
 
 
