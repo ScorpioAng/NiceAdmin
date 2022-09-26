@@ -78,7 +78,7 @@ def RemoveEmp(emp_id):
     flash("Employee Successfully Removed")
     return render_template('remove-employee.html', name = removeTarget)
 
-@app.route("/templates/search-employee.html/<emp_id>", methods=['GET'])
+@app.route("/templates/update-employee.html/<emp_id>", methods=['GET'])
 def SearchEmp(emp_id):
 
     search_sql =("SELECT * FROM employee WHERE emp_id = %s")
