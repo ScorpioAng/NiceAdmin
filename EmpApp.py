@@ -50,6 +50,24 @@ def ReadEmp():
         cursor.close()
     return render_template('view-employee.html', headings = headings, data = data)
 
+@app.route("/templates/view-leave.html", methods=['GET'])
+def ReadLeave():
+    read_sql  = "SELECT * FROM leaveApp"
+    cursor = db_conn.cursor()
+    print("testing")
+
+    try:
+        cursor.execute(read_sql)
+        db_conn.commit()
+        data1 = cursor.fetchall()
+
+
+    except Exception as e: 
+        return str(e)
+    finally:
+        cursor.close()
+    return render_template('view-leave.html', headings1 = headings1, data1 = data1)    
+
 
 @app.route("/templates/remove-employee.html/<emp_id>", methods=['GET','POST'])
 def RemoveEmp(emp_id):
