@@ -360,18 +360,29 @@ def AddPayroll():
     payroll_emp_id= request.form['payroll_emp_id']
     payroll_emp_name= request.form['payroll_emp_name']
     payroll_month = request.form['payroll_month']
-    payroll_salary = request.form['payroll_salary']
-    payroll_overtime = request.form['payroll_overtime']
+    payroll_salary = float(request.form['payroll_salary'])
+    payroll_overtime = float(request.form['payroll_overtime'])
+    epf = float(0.11)
+    socso = float(0.5)
 
-    insert_sql = "INSERT INTO payroll(payroll_emp_id,payroll_emp_name,payroll_month,payroll_salary,payroll_overtime) VALUES (%s, %s, %s, %s, %s)"
+    insert_sql = "INSERT INTO payroll(payroll_emp_id,payroll_emp_name,payroll_month,payroll_salary,payroll_overtime, payroll_netsalary) VALUES (%s, %s, %s, %s, %s, %s)"
     cursor = db_conn.cursor()
 
     try:
+            total_salary = payroll_salary + payroll_overtime
+            total_salary = float(total_salary)
+            payroll_salary = float(payroll_salary)
+            
+            total_epf = total_salary * epf
+            total_socso = total_salary * socso
+            
+            payroll_netsalary = total_salary - float(totalepf) - float(totalsocso)
+            payroll_netsalary = float(payroll_netsalary)
 
         try:
             print("Data inserted in MySQL RDS... ")
 
-            cursor.execute(insert_sql, (leave_emp_id, leave_emp_name, leave_date, leave_days, leave_reason))
+            cursor.execute(insert_sql, (payroll_emp_id, payroll_emp_name, payroll_month, payroll_salary, payroll_overtime, payroll_netsalary))
             db_conn.commit()
 
         except Exception as e:
@@ -381,7 +392,7 @@ def AddPayroll():
         cursor.close()
 
     print("all modification done...")
-    return render_template('add-leave-output.html', name=leave_emp_name)
+    return render_template('add-payroll-output.html', name=payroll_emp_name, name1=payroll_netsalary)
 
 
 
