@@ -30,7 +30,21 @@ headings1=("leave_id","leave_emp_id","leave_emp_name","leave_date","leave_days",
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('index.html')
+    read_sql  = "SELECT * FROM employee"
+    cursor = db_conn.cursor()
+    print("testing")
+
+    try:
+        cursor.execute(read_sql)
+        db_conn.commit()
+        data = cursor.fetchall()
+
+
+    except Exception as e: 
+        return str(e)
+    finally:
+        cursor.close()
+    return render_template('index.html', headings = headings, data = data)
 
 @app.route("/templates/view-employee.html", methods=['GET'])
 def ReadEmp():
