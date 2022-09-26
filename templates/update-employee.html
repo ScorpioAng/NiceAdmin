@@ -1,47 +1,216 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-	<title>Update Employee Information</title>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Dashboard - HR system</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="templates/assets/img/favicon.png" rel="icon">
+  <link href="templates/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="templates/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="templates/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="templates/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="templates/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="templates/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="templates/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="templates/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="templates/assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin - v2.4.0
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
 </head>
-<center>
-	<font color="black" size="4" style="font-family: avenir">
+<body>
+      <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
 
-		<h1 style="color: DodgerBlue">Update Employee Database</h1>
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="{{url_for('home')}}" class="logo d-flex align-items-center">
+        <img src="templates/assets/img/HR-Logo.png" alt="">
+        <span class="d-none d-lg-block">Human Resources</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
 
-		<body bgcolor="lightgrey">
+  </header><!-- End Header -->
 
-            <form action="/templates/update-employee.html/{{row[0]}}" autocomplete="on" method = "POST" enctype="multipart/form-data">
-                <div>
-                    <table>
-                        <tr>
-                            Employee ID:<br> <input style="height:25px;font-size:14pt;color:grey;" readonly type="text" name="emp_id" value="{{ row[0] }}"><br><br>
-                
-                            Email:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="emp_email" value="{{ row[1] }}"><br><br>
-                
-                            Name:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="emp_name" value="{{ row[2] }}"><br><br>
-                
-                            Date of Birth:<br> <input style="height:25px;font-size:14pt;color:grey;" type="date" name="emp_DoB" value="{{ row[3] }}"><br><br>
-                
-                            Phone Number:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="emp_contact" value="{{ row[4] }}"><br><br>
-                
-                            Department:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="emp_department" value="{{ row[5] }}"><br><br>
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
 
-                            Address:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="emp_address" value="{{ row[6] }}"><br><br>
- 
-                            Image: <input type=file name="emp_image" style="height:25px;font-size:14pt;color:grey;" value="{{row[7]}}"> <br><br></tr>
+    <ul class="sidebar-nav" id="sidebar-nav">
 
-                            Resume: <input type=file name="emp_resume" style="height:25px;font-size:14pt;color:grey;" value="{{row[8]}}"> <br><br></tr>
+      <li class="nav-item">
+        <a class="nav-link " href="{{url_for('home')}}">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
 
-                            <button type="submit" style="background: grey; height: 45px; width: 200px; color: white; size: 5; font:oblique;">Update</button>
-                        </tr>
-                    </table>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Employees</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{{url_for('ViewAddEmp')}}">
+              <i class="bi bi-circle"></i><span>Add Employees</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{url_for('ViewViewEmp')}}">
+              <i class="bi bi-circle"></i><span>View Employees</span>
+            </a>
+          </li>          
+        </ul>
+      </li><!-- End Components Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journal-text"></i><span>Payroll</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="templates/add-payroll.html">
+              <i class="bi bi-circle"></i><span>Add Payroll</span>
+            </a>
+          </li>
+          <li>
+            <a href="templates/view-payroll.html">
+              <i class="bi bi-circle"></i><span>View Payroll</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Forms Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-layout-text-window-reverse"></i><span>Leave</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="templates/add-leave.html">
+              <i class="bi bi-circle"></i><span>Add Leaves</span>
+            </a>
+          </li>
+          <li>
+            <a href="templates/view-leave.html">
+              <i class="bi bi-circle"></i><span>View Leaves</span>
+            </a>
+          </li>          
+        </ul>
+      </li><!-- End Tables Nav -->
+  </aside><!-- End Sidebar-->
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Update Employees</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="templates/index.html">Home</a></li>
+          <li class="breadcrumb-item">Employees</li>
+          <li class="breadcrumb-item active">Update Employees</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Update Employees</h5>
+              <form action="/templates/update-employee.html/{{row[0]}}" autocomplete="on" method = "POST" enctype="multipart/form-data">
+                              <!-- General Form Elements -->
+              <form method="POST" action="/templates/add-employee.html" enctype="multipart/form-data">
+                <div class="row mb-3">
+                  <label for="input_emp_id" class="col-sm-2 col-form-label">Employee ID</label>
+                  <div class="col-sm-10">
+                    <input type="number" readonly type="text" class="form-control" name="emp_id" value="{{ row[0] }}">
+                  </div>
                 </div>
-            </form>
+                <div class="row mb-3">
+                  <label for="input_emp_email" class="col-sm-2 col-form-label">Email</label>
+                  <div class="col-sm-10">
+                    <input type="email" class="form-control" name="emp_email" value="{{ row[1] }}">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="input_emp_name" class="col-sm-2 col-form-label">Name</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="emp_name" value="{{ row[2] }}">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="input_emp_DoB" class="col-sm-2 col-form-label">Date Of Birth</label>
+                  <div class="col-sm-10">
+                    <input type="date" class="form-control" name="emp_DoB" value="{{ row[3] }}">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="input_emp_contact" class="col-sm-2 col-form-label">Phone Number</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" name="emp_contact" value="{{ row[4] }}">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="input_emp_department" class="col-sm-2 col-form-label">Department</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="emp_department" value="{{ row[5] }}">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="input_emp_address" class="col-sm-2 col-form-label">Address</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="emp_address" value="{{ row[6] }}">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="input_emp_image" class="col-sm-2 col-form-label">Profile Picture</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="file" id="formFile" name="emp_image" value="{{ row[7] }}">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="input_emp_resume" class="col-sm-2 col-form-label">Resume</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="file" id="formFile" name="emp_resume" value="{{ row[8] }}">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label"></label>
+                  <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Update Employee</button>
+                  </div>
+                </div>
+              </form><!-- End General Form Elements -->
+              </form>
 
-<a href="/about">About Us</a>
-		</body>
+            </div>
+          </div>
 
-	</font>
-</center>
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+</body>
 </html>
 
