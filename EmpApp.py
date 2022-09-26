@@ -127,7 +127,7 @@ def RemoveLeave(leave_id):
 
     try:
         remove_sql =("DELETE FROM leaveApp WHERE leave_id= %s")
-        cursor.execute(remove_sql,emp_id)
+        cursor.execute(remove_sql,leave_id)
         db_conn.commit()
 
     except Exception as e: 
@@ -136,7 +136,7 @@ def RemoveLeave(leave_id):
         cursor.close()
 
     flash("Leave Successfully Removed")
-    return render_template('remove-employee.html', name = emp_id)    
+    return render_template('remove-employee.html', name = leave_id)    
 
 @app.route("/templates/update-employee.html/<emp_id>", methods=['GET'])
 def SearchEmp(emp_id):
