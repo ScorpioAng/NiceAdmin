@@ -346,7 +346,7 @@ def UpdatePayroll(payroll_emp_name):
 
 
       
-    update_sql = ("UPDATE payroll SET payroll_month=%s, payroll_salary=%s, payroll_overtime=%s   WHERE payroll_emp_name=%s")
+    update_sql = ("UPDATE payroll SET payroll_month=%s, payroll_salary=%s, payroll_overtime=%s, payroll_netsalary=%s   WHERE payroll_emp_name=%s")
     cursor = db_conn.cursor()
             
     
@@ -363,7 +363,7 @@ def UpdatePayroll(payroll_emp_name):
         payroll_netsalary = total_salary - float(total_epf) - float(total_socso)
         payroll_netsalary = float(payroll_netsalary)        
 
-        cursor.execute(update_sql, (payroll_month, payroll_salary, payroll_overtime, payroll_emp_name))
+        cursor.execute(update_sql, (payroll_month, payroll_salary, payroll_overtime, payroll_netsalary, payroll_emp_name))
         db_conn.commit()
 
     except Exception as e:
