@@ -383,8 +383,8 @@ def AddPayroll():
             cursor.execute(insert_sql, (payroll_emp_id, payroll_emp_name, payroll_month, payroll_salary, payroll_overtime, payroll_netsalary))
             db_conn.commit()
 
-        except Exception as e:
-            return str(e)
+    except Exception as e:
+        return str(e)
 
     finally:
         cursor.close()
