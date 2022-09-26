@@ -28,7 +28,7 @@ table2 = 'payroll'
 
 headings=("emp_id","emp_email","emp_name","emp_DoB","emp_contact", "emp_department", "emp_address", "emp_image", "emp_resume" )
 headings1=("leave_id","leave_emp_id","leave_emp_name","leave_date","leave_days", "leave_reason")
-headings1=("payroll_id","payroll_emp_id","payroll_emp_name","payroll_month","payroll_salary", "payroll_overtime", "payroll_netsalary")
+headings2=("payroll_id","payroll_emp_id","payroll_emp_name","payroll_month","payroll_salary", "payroll_overtime", "payroll_netsalary")
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
