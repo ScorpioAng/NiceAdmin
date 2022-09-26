@@ -214,9 +214,9 @@ def SearchLeave(leave_id):
     search_sql =("SELECT * FROM leaveApp WHERE leave_id = %s")
     cursor = db_conn.cursor()
     try: 
-          cursor.execute(search_sql,leave_id)
-          db_conn.commit()
-          row = cursor.fetchone() 
+        cursor.execute(search_sql,leave_id)
+        db_conn.commit()
+        row = cursor.fetchone() 
             
     except Exception as e: 
           print(str(e))
