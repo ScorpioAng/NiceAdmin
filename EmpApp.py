@@ -30,7 +30,7 @@ headings=("emp_id","emp_email","emp_name","emp_DoB","emp_contact", "emp_departme
 def home():
     return render_template('index.html')
 
-@app.route("/templates/view-employee.html", methods=['GET','POST'])
+@app.route("/templates/view-employee.html", methods=['GET'])
 def ReadEmp():
     read_sql  = "SELECT * FROM employee"
     cursor = db_conn.cursor()
@@ -56,6 +56,14 @@ def ViewAddEmp():
 def ViewViewEmp():
     ReadEmp()
     return render_template('view-employee.html')
+
+@app.route("/templates/view-employee.html", methods=['POST'])
+def GetDelEmp():
+    employeename= request.form['row[0]']
+    print(employeename)
+
+    return render_template('view-employee.html', headings = headings, data = data)
+
 
 @app.route("/templates/add-employee.html", methods=['POST'])
 def AddEmp():
