@@ -80,7 +80,6 @@ def RemoveEmp(emp_id):
 
 @app.route("/templates/update-employee.html/<emp_id>", methods=['GET','POST'])
 def UpdateEmp(emp_id):
-    emp_id= request.form['emp_id']
     emp_email = request.form['emp_email']
     emp_name = request.form['emp_name']
     emp_DoB = request.form['emp_DoB']
@@ -89,7 +88,7 @@ def UpdateEmp(emp_id):
     emp_address = request.form['emp_address']
     emp_image = request.files['emp_image']
     emp_resume = request.files['emp_resume']    
-    update_sql = ("UPDATE employee SET emp_id=%s, emp_email=%s, emp_name=%s, emp_DoB=%s, emp_contact=%s, emp_department=%s, emp_address=%s, emp_image=%s, emp_resume=%s   WHERE emp_id=%s")
+    update_sql = ("UPDATE employee SET emp_email=%s, emp_name=%s, emp_DoB=%s, emp_contact=%s, emp_department=%s, emp_address=%s, emp_image=%s, emp_resume=%s   WHERE emp_id=%s")
     cursor = db_conn.cursor()
 
 
@@ -136,7 +135,7 @@ def UpdateEmp(emp_id):
                 custombucket,
                 emp_resume_file_name_in_s3)
 
-            cursor.execute(update_sql, (emp_id, emp_email, emp_name, emp_DoB, emp_contact, emp_department, emp_address, image_object_url, resume_object_url))
+            cursor.execute(update_sql, (emp_email, emp_name, emp_DoB, emp_contact, emp_department, emp_address, image_object_url, resume_object_url))
             db_conn.commit()
 
         except Exception as e:
