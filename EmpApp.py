@@ -76,7 +76,7 @@ def home():
         return str(e)
     finally:
         cursor.close()
-    return render_template('view-payroll.html', headings2 = headings2, data2 = data2)
+    return render_template('index.html', headings2 = headings2, data2 = data2)
 
 
 @app.route("/templates/view-employee.html", methods=['GET'])
