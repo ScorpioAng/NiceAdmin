@@ -24,9 +24,11 @@ db_conn = connections.Connection(
 output = {}
 table = 'employee'
 table1 = 'leaveApp'
+table2 = 'payroll'
 
 headings=("emp_id","emp_email","emp_name","emp_DoB","emp_contact", "emp_department", "emp_address", "emp_image", "emp_resume" )
 headings1=("leave_id","leave_emp_id","leave_emp_name","leave_date","leave_days", "leave_reason")
+headings1=("payroll_id","payroll_emp_id","payroll_emp_name","payroll_month","payroll_salary", "payroll_overtime", "payroll_netsalary")
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
@@ -352,6 +354,34 @@ def AddLeave():
     print("all modification done...")
     return render_template('add-leave-output.html', name=leave_emp_name)
 
+
+@app.route("/templates/add-payroll.html", methods=['POST'])
+def AddLeave():
+    payroll_emp_id= request.form['payroll_emp_id']
+    payroll_emp_name= request.form['payroll_emp_name']
+    payroll_month = request.form['payroll_month']
+    payroll_salary = request.form['payroll_salary']
+    payroll_overtime = request.form['payroll_overtime']
+
+    insert_sql = "INSERT INTO payroll(payroll_emp_id,payroll_emp_name,payroll_month,payroll_salary,payroll_overtime) VALUES (%s, %s, %s, %s, %s)"
+    cursor = db_conn.cursor()
+
+    try:
+
+        try:
+            print("Data inserted in MySQL RDS... ")
+
+            cursor.execute(insert_sql, (leave_emp_id, leave_emp_name, leave_date, leave_days, leave_reason))
+            db_conn.commit()
+
+        except Exception as e:
+            return str(e)
+
+    finally:
+        cursor.close()
+
+    print("all modification done...")
+    return render_template('add-leave-output.html', name=leave_emp_name)
 
 
 
