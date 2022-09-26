@@ -85,7 +85,6 @@ def ReadEmp():
 def ReadLeave():
     read_sql  = "SELECT * FROM leaveApp"
     cursor = db_conn.cursor()
-    print("testing")
 
     try:
         cursor.execute(read_sql)
@@ -98,6 +97,24 @@ def ReadLeave():
     finally:
         cursor.close()
     return render_template('view-leave.html', headings1 = headings1, data1 = data1)    
+
+@app.route("/templates/view-payroll.html", methods=['GET'])
+def ReadLeave():
+    read_sql  = "SELECT * FROM payroll"
+    cursor = db_conn.cursor()
+
+    try:
+        cursor.execute(read_sql)
+        db_conn.commit()
+        data1 = cursor.fetchall()
+
+
+    except Exception as e: 
+        return str(e)
+    finally:
+        cursor.close()
+    return render_template('view-payroll.html', headings2 = headings2, data2 = data2)    
+
 
 
 @app.route("/templates/remove-employee.html/<emp_id>", methods=['GET','POST'])
@@ -257,11 +274,6 @@ def ViewRemoveEmp(emp_id):
     RemoveEmp(emp_id)
     return render_template('remove-employee.html')
 
-#@app.route("/templates/update-employee.html/<emp_id>", methods=['GET'])
-#def ViewUpdateEmp(emp_id):
-#    UpdateEmp(emp_id)
-#    return render_template('update-employee.html')
-
 
 @app.route("/templates/add-employee.html", methods=['POST'])
 def AddEmp():
@@ -323,8 +335,6 @@ def AddEmp():
 
     print("all modification done...")
     return render_template('add-employee-output.html', name=emp_name)
-
-
 
 @app.route("/templates/add-leave.html", methods=['POST'])
 def AddLeave():
@@ -391,8 +401,6 @@ def AddPayroll():
 
     print("all modification done...")
     return render_template('add-payroll-output.html', name=payroll_emp_name, name1=payroll_netsalary)
-
-
 
 
 @app.route("/updateprofile/<empid>")
