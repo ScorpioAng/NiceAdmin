@@ -176,7 +176,7 @@ def RemovePayroll(payroll_id):
     cursor = db_conn.cursor()
 
     try:
-        remove_sql =("DELETE FROM leaveApp WHERE payroll_id= %s")
+        remove_sql =("DELETE FROM payroll WHERE payroll_id= %s")
         cursor.execute(remove_sql,payroll_id)
         db_conn.commit()
 
