@@ -36,21 +36,143 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 </head>
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="{{url_for('home')}}" class="logo d-flex align-items-center">
+        <img src="templates/assets/img/HR-Logo.png" alt="">
+        <span class="d-none d-lg-block">Human Resources</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link " href="{{url_for('home')}}">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Employees</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{{url_for('ViewAddEmp')}}">
+              <i class="bi bi-circle"></i><span>Add Employees</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{url_for('ViewViewEmp')}}">
+              <i class="bi bi-circle"></i><span>View Employees</span>
+            </a>
+          </li>          
+        </ul>
+      </li><!-- End Components Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journal-text"></i><span>Payroll</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="templates/add-payroll.html">
+              <i class="bi bi-circle"></i><span>Add Payroll</span>
+            </a>
+          </li>
+          <li>
+            <a href="templates/view-payroll.html">
+              <i class="bi bi-circle"></i><span>View Payroll</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Forms Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-layout-text-window-reverse"></i><span>Leave</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="templates/add-leave.html">
+              <i class="bi bi-circle"></i><span>Add Leaves</span>
+            </a>
+          </li>
+          <li>
+            <a href="templates/view-leave.html">
+              <i class="bi bi-circle"></i><span>View Leaves</span>
+            </a>
+          </li>          
+        </ul>
+      </li><!-- End Tables Nav -->
+  </aside><!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Add Employees</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="templates/index.html">Home</a></li>
+          <li class="breadcrumb-item">Employees</li>
+          <li class="breadcrumb-item active">Add Employees</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+	<section class="section">
+		<div class="row">
+		  <div class="col-lg-6">
+	
+			<div class="card">
+			  <div class="card-body">
+				<h5 class="card-title">Add Employees</h5>
+				<h2>Employee {{ name }} has been added to the database</h2>
+			  </div>
+			</div>
+	
+		  </div>
+		</div>
+	  </section>
+
+
+
 <html>
-<center>
-	<font color="DodgerBlue" size="5" style="font-family: avenir">
-		<body bgcolor="lightgrey">
-			<h1>SAVE SUCCESSFUL</h1><br>
-			<h2>Following Employee has been added to the database</h2><br>
-			<h2>{{ name }}</h2><br>
-			<title>Add Emp Output</title>
-				<form action="http://3.134.115.108:80/" autocomplete="on" method = "GET">
 
-					<button type="submit" style="background: grey; height: 45px; width: 200px; color:white; font:oblique;">GO BACK</button><br><br>
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>Human Resources</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+      Designed by Melvin Ang Wai Hin & Loh Mon Long
+    </div>
+  </footer><!-- End Footer -->
 
-				</form>
-		</body>
-	</font>
-</center>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/chart.js/chart.min.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script src="assets/vendor/quill/quill.min.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
 </html>
