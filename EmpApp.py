@@ -79,7 +79,7 @@ def RemoveEmp(emp_id):
     return render_template('remove-employee.html', name = removeTarget)
 
 @app.route("/templates/remove-employee.html/<emp_id>", methods=['GET','POST'])
-def UpdateEmp():
+def UpdateEmp(emp_id):
     emp_id= request.form['emp_id']
     emp_email = request.form['emp_email']
     emp_name = request.form['emp_name']
@@ -161,10 +161,10 @@ def ViewRemoveEmp(emp_id):
     RemoveEmp(emp_id)
     return render_template('remove-employee.html')
 
-@app.route("/templates/update-employee.html/<emp_id>", methods=['GET'])
-def ViewUpdateEmp(emp_id):
-    UpdateEmp(emp_id)
-    return render_template('update-employee.html')
+#@app.route("/templates/update-employee.html/<emp_id>", methods=['GET'])
+#def ViewUpdateEmp(emp_id):
+#    UpdateEmp(emp_id)
+#    return render_template('update-employee.html')
 
 
 @app.route("/templates/add-employee.html", methods=['POST'])
