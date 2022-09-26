@@ -48,6 +48,37 @@ def ReadEmp():
         cursor.close()
     return render_template('view-employee.html', headings = headings, data = data)
 
+
+@app.route("/templates/remove-employee.html/<emp_id>", methods=['GET','POST'])
+def RemoveEmp(emp_id):
+
+    removeTarget = "" + emp_id
+    search_sql =("SELECT image FROM employee WHERE emp_id = %s")
+    cursor = db_conn.cursor()
+
+    try:
+        cursor.execute(search_sql,emp_id)
+        db_conn.commit()
+        row = cursor.fetchone()
+        if row: 
+            keypath = row.image
+
+        s3 = boto3.resource('s3')
+        s3.delete_object(Bucket= bucket, Key= keypath)
+
+        remove_sql =("DELETE FROM employee WHERE emp_id= %s")
+        cursor.execute(remove_sql,emp_id)
+        db_conn.commit()
+
+    except Exception as e: 
+        return (e)
+    finally:
+        cursor.close()
+
+    flash("Employee Successfully Removed")
+    return render_template('remove-employee.html', name = removeTarget)
+
+
 @app.route("/templates/add-employee.html", methods=['GET'])
 def ViewAddEmp():
     return render_template('add-employee.html')
@@ -57,12 +88,10 @@ def ViewViewEmp():
     ReadEmp()
     return render_template('view-employee.html')
 
-@app.route("/templates/view-employee.html", methods=['POST'])
-def GetDelEmp():
-    employeename= request.form['row[0]']
-    print(employeename)
-
-    return render_template('view-employee.html', headings = headings, data = data)
+@app.route("/templates/remove-employee.html/<emp_id>", methods=['GET'])
+def ViewRemoveEmp(emp_id):
+    RemoveEmp(emp_id)
+    return render_template('remove-employee.html')
 
 
 @app.route("/templates/add-employee.html", methods=['POST'])
@@ -126,39 +155,6 @@ def AddEmp():
     print("all modification done...")
     return render_template('add-employee-output.html', name=emp_name)
 
-
-
-
-
-@app.route("/removeemp", methods=['GET','POST'])
-def RemoveEmp():
-    emp_id = request.form['emp_id']
-
-    removeTarget = "" + emp_id
-    search_sql =("SELECT image FROM employee WHERE emp_id = %s")
-    cursor = db_conn.cursor()
-
-    try:
-        cursor.execute(search_sql,emp_id)
-        db_conn.commit()
-        row = cursor.fetchone()
-        if row: 
-            keypath = row.image
-
-        s3 = boto3.resource('s3')
-        s3.delete_object(Bucket= bucket, Key= keypath)
-
-        remove_sql =("DELETE FROM employee WHERE emp_id= %s")
-        cursor.execute(remove_sql,emp_id)
-        db_conn.commit()
-
-    except Exception as e: 
-        return (e)
-    finally:
-        cursor.close()
-
-    flash("Employee Successfully Removed")
-    return render_template('RemoveEmpOutput.html', name = removeTarget)
 
 
 @app.route("/searchemp", methods=['GET','POST'])
