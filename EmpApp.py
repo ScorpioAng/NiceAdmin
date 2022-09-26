@@ -71,7 +71,7 @@ def RemoveEmp(emp_id):
         db_conn.commit()
 
     except Exception as e: 
-        return (e)
+        print (e)
     finally:
         cursor.close()
 
