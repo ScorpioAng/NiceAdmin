@@ -81,17 +81,17 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-journal-text"></i><span>Payroll</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-journal-text"></i><span>Payrolls</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="templates/add-payroll.html">
-              <i class="bi bi-circle"></i><span>Add Payroll</span>
+            <a href="{{url_for('ViewAddPayroll')}}">
+              <i class="bi bi-circle"></i><span>Add Payrolls</span>
             </a>
           </li>
           <li>
-            <a href="templates/view-payroll.html">
-              <i class="bi bi-circle"></i><span>View Payroll</span>
+            <a href="{{url_for('ViewViewPayroll')}}">
+              <i class="bi bi-circle"></i><span>View Payrolls</span>
             </a>
           </li>
         </ul>
@@ -99,16 +99,16 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-layout-text-window-reverse"></i><span>Leave</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-layout-text-window-reverse"></i><span>Leaves</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="templates/add-leave.html">
+            <a href="{{url_for('ViewAddLeave')}}">
               <i class="bi bi-circle"></i><span>Add Leaves</span>
             </a>
           </li>
           <li>
-            <a href="templates/view-leave.html">
+            <a href="{{url_for('ViewViewLeave')}}">
               <i class="bi bi-circle"></i><span>View Leaves</span>
             </a>
           </li>          

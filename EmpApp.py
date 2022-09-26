@@ -161,10 +161,28 @@ def UpdateEmp(emp_id):
 def ViewAddEmp():
     return render_template('add-employee.html')
 
+@app.route("/templates/add-leave.html", methods=['GET'])
+def ViewAddLeave():
+    return render_template('add-leave.html')
+    
+@app.route("/templates/add-payroll.html", methods=['GET'])
+def ViewAddPayroll():
+    return render_template('add-payroll.html')
+
 @app.route("/templates/view-employee.html", methods=['GET'])
 def ViewViewEmp():
     ReadEmp()
     return render_template('view-employee.html')
+
+@app.route("/templates/view-leave.html", methods=['GET'])
+def ViewViewLeave():
+    ReadLeave()
+    return render_template('view-leave.html')
+
+@app.route("/templates/view-payroll.html", methods=['GET'])
+def ViewViewPayroll():
+    ReadPayroll()
+    return render_template('view-payroll.html')
 
 @app.route("/templates/remove-employee.html/<emp_id>", methods=['GET'])
 def ViewRemoveEmp(emp_id):
@@ -239,6 +257,33 @@ def AddEmp():
     return render_template('add-employee-output.html', name=emp_name)
 
 
+
+@app.route("/templates/add-leave.html", methods=['POST'])
+def AddEmp():
+    leave_emp_id= request.form['emp_id']
+    leave_date = request.form['leave_date']
+    leave_days = request.form['leave_days']
+    leave_reason = request.form['leave_reason']
+
+    insert_sql = "INSERT INTO leaves VALUES (%s, %s, %s, %s)"
+    cursor = db_conn.cursor()
+
+    try:
+
+        try:
+            print("Data inserted in MySQL RDS... ")
+
+            cursor.execute(insert_sql, (leave_emp_id, leave_date, leave_days, leave_reason))
+            db_conn.commit()
+
+        except Exception as e:
+            return str(e)
+
+    finally:
+        cursor.close()
+
+    print("all modification done...")
+    return render_template('add-leave-output.html', name=leave_emp_id)
 
 
 
