@@ -296,12 +296,12 @@ def UpdateEmp(emp_id):
     return render_template('update-employee-output.html', name = emp_name)
 
 
-@app.route("/templates/update-employee.html/<leave_id>", methods=['POST'])
+@app.route("/templates/update-leave.html/<leave_id>", methods=['POST'])
 def UpdateLeave(leave_id):
     leave_date = request.form['leave_date']
     leave_days = request.form['leave_days']
     leave_reason = request.form['leave_reason']    
-    update_sql = ("UPDATE employee SET leave_date=%s, leave_days=%s, leave_reason=%s   WHERE leave_id=%s")
+    update_sql = ("UPDATE leaveApp SET leave_date=%s, leave_days=%s, leave_reason=%s   WHERE leave_id=%s")
     cursor = db_conn.cursor()
             
     
