@@ -70,7 +70,7 @@ def RemoveEmp(emp_id):
         cursor.close()
 
     flash("Employee Successfully Removed")
-    return render_template('remove-employee-output.html', name = emp_id)
+    return render_template('remove-employee.html', name = emp_id)
 
 @app.route("/templates/update-employee.html/<emp_id>", methods=['GET'])
 def SearchEmp(emp_id):
