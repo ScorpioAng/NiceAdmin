@@ -61,7 +61,6 @@ def home():
         return str(e)
     finally:
         cursor.close()        
-    return render_template('index.html', headings = headings, data = data, headings1 = headings1, data1 = data1)
 
     read_sql  = "SELECT * FROM payroll"
     cursor = db_conn.cursor()
@@ -76,8 +75,7 @@ def home():
         return str(e)
     finally:
         cursor.close()
-    return render_template('index.html', headings2 = headings2, data2 = data2)
-
+    return render_template('index.html', headings = headings, data = data, headings1 = headings1, data1 = data1, headings2 = headings2, data2 = data2)
 
 @app.route("/templates/view-employee.html", methods=['GET'])
 def ReadEmp():
