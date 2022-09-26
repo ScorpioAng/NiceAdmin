@@ -99,7 +99,7 @@ def ReadLeave():
     return render_template('view-leave.html', headings1 = headings1, data1 = data1)    
 
 @app.route("/templates/view-payroll.html", methods=['GET'])
-def ReadLeave():
+def ReadPayroll():
     read_sql  = "SELECT * FROM payroll"
     cursor = db_conn.cursor()
 
