@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Dashboard - HR system</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="../assets/img/favicon.png" rel="icon">
+  <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="../assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="../assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin - v2.4.0
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+<body>
+      <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="{{url_for('home')}}" class="logo d-flex align-items-center">
+        <span class="d-none d-lg-block">Human Resources</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link " href="{{url_for('home')}}">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Employees</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{{url_for('ViewAddEmp')}}">
+              <i class="bi bi-circle"></i><span>Add Employees</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{url_for('ViewViewEmp')}}">
+              <i class="bi bi-circle"></i><span>View Employees</span>
+            </a>
+          </li>          
+        </ul>
+      </li><!-- End Components Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journal-text"></i><span>Payrolls</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{{url_for('ViewAddPayroll')}}">
+              <i class="bi bi-circle"></i><span>Add Payrolls</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{url_for('ViewViewPayroll')}}">
+              <i class="bi bi-circle"></i><span>View Payrolls</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Forms Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-layout-text-window-reverse"></i><span>Leaves</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{{url_for('ViewAddLeave')}}">
+              <i class="bi bi-circle"></i><span>Add Leaves</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{url_for('ViewViewLeave')}}">
+              <i class="bi bi-circle"></i><span>View Leaves</span>
+            </a>
+          </li>          
+        </ul>
+      </li><!-- End Tables Nav -->
+  </aside><!-- End Sidebar-->
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Update Payrolls</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="templates/index.html">Home</a></li>
+          <li class="breadcrumb-item">Payrolls</li>
+          <li class="breadcrumb-item active">Update Payrolls</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Update Payrolls</h5>
+              <form action="/templates/update-payroll.html/{{row[0]}}" autocomplete="on" method = "POST" enctype="multipart/form-data">
+                              <!-- General Form Elements -->
+              <form method="POST" action="/templates/add-employee.html" enctype="multipart/form-data">
+                <div class="row mb-3">
+                  <label for="input_payroll_id" class="col-sm-2 col-form-label">Payroll ID</label>
+                  <div class="col-sm-10">
+                    <input type="number" readonly type="text" class="form-control" name="payroll_id" value="{{ row[0] }}">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="input_payroll_emp_id" class="col-sm-2 col-form-label">Employee ID</label>
+                  <div class="col-sm-10">
+                    <input type="number" readonly type="text" class="form-control" name="payroll_emp_id" value="{{ row[1] }}">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="input_payroll_emp_name" class="col-sm-2 col-form-label">Employee Name</label>
+                  <div class="col-sm-10">
+                    <input type="text" readonly type="text" class="form-control" name="payroll_emp_name" value="{{ row[2] }}">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="input_payroll_month" class="col-sm-2 col-form-label">Payroll Month</label>
+                  <div class="col-sm-10">
+                    <input type="month" class="form-control" name="payroll_month" value="{{ row[3] }}">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="input_payroll_salary" class="col-sm-2 col-form-label">Salary (RM)</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" name="payroll_salary" value="{{ row[4] }}">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="input_payroll_overtime" class="col-sm-2 col-form-label">Overtime (RM)</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="payroll_overtime" value="{{ row[5] }}">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="input_payroll_netsalary" class="col-sm-2 col-form-label">Net Salary (RM)</label>
+                    <div class="col-sm-10">
+                      <input type="text" readonly type="text" class="form-control" name="payroll_overtime" value="{{ row[6] }}">
+                    </div>
+                  </div>                
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label"></label>
+                  <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Update Payroll</button>
+                  </div>
+                </div>
+              </form><!-- End General Form Elements -->
+              </form>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>Human Resources</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+      Designed by Melvin Ang Wai Hin & Loh Mon Long
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/vendor/chart.js/chart.min.js"></script>
+  <script src="../assets/vendor/echarts/echarts.min.js"></script>
+  <script src="../assets/vendor/quill/quill.min.js"></script>
+  <script src="../assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="../assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="../assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
+

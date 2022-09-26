@@ -224,6 +224,23 @@ def SearchLeave(leave_id):
         cursor.close()
     return render_template('update-leave.html',row = row)
 
+@app.route("/templates/update-payroll.html/<payroll_emp_name>", methods=['GET'])
+def SearchPayroll(payroll_emp_name):
+
+    search_sql =("SELECT * FROM payroll WHERE payroll_emp_name = %s")
+    cursor = db_conn.cursor()
+    try: 
+        cursor.execute(search_sql,payroll_emp_name)
+        db_conn.commit()
+        row = cursor.fetchone() 
+            
+    except Exception as e: 
+        print(str(e))
+    finally:
+        cursor.close()
+    return render_template('update-payroll.html',row = row)
+
+
 
 
 
@@ -316,6 +333,46 @@ def UpdateLeave(leave_id):
     
     print("Update Succesfully")
     return render_template('update-leave-output.html', name = leave_id)
+
+
+@app.route("/templates/update-payroll.html/<payroll_emp_name>", methods=['POST'])
+def UpdatePayroll(payroll_emp_name):
+
+    payroll_month = request.form['payroll_month']
+    payroll_salary = float(request.form['payroll_salary'])
+    payroll_overtime = float(request.form['payroll_overtime'])
+    epf = float(0.11)
+    socso = float(0.05)
+
+
+      
+    update_sql = ("UPDATE leaveApp SET payroll_month=%s, payroll_salary=%s, payroll_overtime=%s   WHERE payroll_emp_name=%s")
+    cursor = db_conn.cursor()
+            
+    
+    try:
+
+
+        total_salary = payroll_salary + payroll_overtime
+        total_salary = float(total_salary)
+        payroll_salary = float(payroll_salary)
+            
+        total_epf = total_salary * epf
+        total_socso = total_salary * socso
+            
+        payroll_netsalary = total_salary - float(total_epf) - float(total_socso)
+        payroll_netsalary = float(payroll_netsalary)        
+
+        cursor.execute(update_sql, (payroll_month, payroll_salary, payroll_overtime, payroll_emp_name))
+        db_conn.commit()
+
+    except Exception as e:
+        return str(e)
+        cursor.close()
+    
+    print("Update Succesfully")
+    return render_template('update-payroll-output.html', name = payroll_emp_name, name1=payroll_netsalary)
+
 
 
 
