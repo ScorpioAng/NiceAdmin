@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Update Employee Information</title>
+</head>
+<center>
+	<font color="black" size="4" style="font-family: avenir">
+
+		<h1 style="color: DodgerBlue">Update Employee Database</h1>
+
+		<body bgcolor="lightgrey">
+
+            <form action="/templates/update-employee.html" autocomplete="on" method = "POST" enctype="multipart/form-data">
+                <div>
+                    <table>
+                        <tr>
+                            Employee ID:<br> <input style="height:25px;font-size:14pt;color:grey;" readonly type="text" name="emp_id" value="{{ row[0] }}"><br><br>
+                
+                            Email:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="emp_email" value="{{ row[1] }}"><br><br>
+                
+                            Name:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="emp_name" value="{{ row[2] }}"><br><br>
+                
+                            Date of Birth:<br> <input style="height:25px;font-size:14pt;color:grey;" type="date" name="emp_DoB" value="{{ row[3] }}"><br><br>
+                
+                            Phone Number:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="emp_contact" value="{{ row[4] }}"><br><br>
+                
+                            Department:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="emp_department" value="{{ row[5] }}"><br><br>
+
+                            Address:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="emp_address" value="{{ row[6] }}"><br><br>
+ 
+                            Image: <input type=file name="emp_image" style="height:25px;font-size:14pt;color:grey;" value="{{row[7]}}"> <br><br></tr>
+
+                            Resume: <input type=file name="emp_resume" style="height:25px;font-size:14pt;color:grey;" value="{{row[8]}}"> <br><br></tr>
+
+                            <button type="submit" style="background: grey; height: 45px; width: 200px; color: white; size: 5; font:oblique;">Update</button>
+                        </tr>
+                    </table>
+                </div>
+            </form>
+
+<a href="/about">About Us</a>
+		</body>
+
+	</font>
+</center>
+</html>
+

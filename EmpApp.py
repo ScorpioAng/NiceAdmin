@@ -78,6 +78,74 @@ def RemoveEmp(emp_id):
     flash("Employee Successfully Removed")
     return render_template('remove-employee.html', name = removeTarget)
 
+@app.route("/updateemp", methods=['GET','POST'])
+def UpdateEmp():
+    emp_id= request.form['emp_id']
+    emp_email = request.form['emp_email']
+    emp_name = request.form['emp_name']
+    emp_DoB = request.form['emp_DoB']
+    emp_contact = request.form['emp_contact']
+    emp_department = request.form['emp_department']
+    emp_address = request.form['emp_address']
+    emp_image = request.files['emp_image']
+    emp_resume = request.files['emp_resume']    
+    update_sql = ("UPDATE employee SET emp_id=%s, emp_email=%s, emp_name=%s, emp_DoB=%s, emp_contact=%s, emp_department=%s, emp_address=%s, emp_image=%s, emp_resume=%s   WHERE emp_id=%s")
+    cursor = db_conn.cursor()
+
+
+    if emp_id == "": 
+        return "Please enter Employee ID"
+    elif emp_email == "":
+        return "Please enter First Name"
+    elif emp_name =="":
+        return "Please enter Last Name"
+    elif emp_DoB =="":
+        return "Please enter Primary Skill"
+    elif emp_contact =="":
+        return "Please enter Location"
+    elif emp_department == "":
+        return "Please select an Image"
+    elif emp_address == "":
+        return "Please select an Image"
+    elif emp_image == "":
+        return "Please select an Image"
+    elif emp_resume == "":
+        return "Please select an Image"                
+    try:
+        emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
+        emp_resume_file_name_in_s3 = "emp-id-" + str(emp_id) + "_resume_file"
+        try:
+            s3 = boto3.resource('s3')
+            s3.Bucket(custombucket).put_object(Key=emp_image_file_name_in_s3, Body=emp_image)
+            s3.Bucket(custombucket).put_object(Key=emp_resume_file_name_in_s3, Body=emp_resume)
+            bucket_location = boto3.client('s3').get_bucket_location(Bucket = custombucket)
+            s3_location = (bucket_location['LocationConstraint'])
+
+            if s3_location is None: 
+                s3_location = ''
+            else: 
+                s3_location = '-' + s3_location
+
+            image_object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
+                s3_location,
+                custombucket,
+                emp_image_file_name_in_s3)
+
+            resume_object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
+                s3_location,
+                custombucket,
+                emp_resume_file_name_in_s3)
+
+            cursor.execute(update_sql, (emp_id, emp_email, emp_name, emp_DoB, emp_contact, emp_department, emp_address, image_object_url, resume_object_url))
+            db_conn.commit()
+
+        except Exception as e:
+            return str(e)
+    finally:
+        cursor.close()
+    
+    print("Update Succesfully")
+    return render_template('update-employee-output.html', name = emp_name)
 
 @app.route("/templates/add-employee.html", methods=['GET'])
 def ViewAddEmp():
@@ -92,6 +160,11 @@ def ViewViewEmp():
 def ViewRemoveEmp(emp_id):
     RemoveEmp(emp_id)
     return render_template('remove-employee.html')
+
+@app.route("/templates/update-employee.html/<emp_id>", methods=['GET'])
+def ViewUpdateEmp(emp_id):
+    UpdateEmp(emp_id)
+    return render_template('update-employee.html')
 
 
 @app.route("/templates/add-employee.html", methods=['POST'])
@@ -181,61 +254,6 @@ def SearchEmp():
         cursor.close()
 
 
-@app.route("/updateemp", methods=['GET','POST'])
-def UpdateEmp():
-    emp_id = request.form['emp_id']
-    first_name = request.form['first_name']
-    last_name = request.form['last_name']
-    pri_skill = request.form['pri_skill']
-    location = request.form['location']
-    emp_image_file = request.files['emp_image_file']
-    insert_sql = ("UPDATE employee SET first_name=%s, last_name=%s, pri_skill=%s, location=%s, image=%s WHERE emp_id=%s")
-    cursor = db_conn.cursor()
-
-
-    if emp_id == "": 
-        return "Please enter Employee ID"
-    elif first_name == "":
-        return "Please enter First Name"
-    elif last_name =="":
-        return "Please enter Last Name"
-    elif pri_skill =="":
-        return "Please enter Primary Skill"
-    elif location =="":
-        return "Please enter Location"
-    elif emp_image_file == "":
-        return "Please select an Image"
-
-    try:
-        emp_name = "" + first_name + " " + last_name
-        emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
-
-        try:
-            s3 = boto3.resource('s3')
-            s3.Bucket(custombucket).put_object(Key = emp_image_file_name_in_s3, Body = emp_image_file)
-            bucket_location = boto3.client('s3').get_bucket_location(Bucket = custombucket)
-            s3_location = (bucket_location['LocationConstraint'])
-
-            if s3_location is None: 
-                s3_location = ''
-            else: 
-                s3_location = '-' + s3_location
-
-            object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
-                s3_location,
-                custombucket,
-                emp_image_file_name_in_s3)
-
-            cursor.execute(insert_sql, (first_name, last_name, pri_skill, location, emp_id, object_url))
-            db_conn.commit()
-
-        except Exception as e:
-            return str(e)
-    finally:
-        cursor.close()
-    
-    print("Update Succesfully")
-    return render_template('UpResults.html', name = emp_name)
 
 
 @app.route("/updateprofile/<empid>")
