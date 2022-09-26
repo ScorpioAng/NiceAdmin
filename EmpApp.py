@@ -51,32 +51,26 @@ def ReadEmp():
 
 @app.route("/templates/remove-employee.html/<emp_id>", methods=['GET','POST'])
 def RemoveEmp(emp_id):
-
-    removeTarget = "" + emp_id
-    search_sql =("SELECT image FROM employee WHERE emp_id = %s")
     cursor = db_conn.cursor()
 
     try:
-        cursor.execute(search_sql,emp_id)
-        db_conn.commit()
-        row = cursor.fetchone()
-        if row: 
-            keypath = row.image
+        emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
+        emp_resume_file_name_in_s3 = "emp-id-" + str(emp_id) + "_resume_file"
 
-        s3 = boto3.resource('s3')
-        s3.delete_object(Bucket= bucket, Key= keypath)
-
+        s3 = boto3.client('s3')
+        s3.delete_object(Bucket= bucket, Key= emp_image_file_name_in_s3)
+        s3.delete_object(Bucket= bucket, Key= emp_resume_file_name_in_s3)
         remove_sql =("DELETE FROM employee WHERE emp_id= %s")
         cursor.execute(remove_sql,emp_id)
         db_conn.commit()
 
     except Exception as e: 
-        print (e)
+        print (str(e))
     finally:
         cursor.close()
 
     flash("Employee Successfully Removed")
-    return render_template('remove-employee.html', name = removeTarget)
+    return render_template('remove-employee-output.html', name = emp_id)
 
 @app.route("/templates/update-employee.html/<emp_id>", methods=['GET'])
 def SearchEmp(emp_id):
