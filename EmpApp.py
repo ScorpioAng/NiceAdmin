@@ -78,7 +78,7 @@ def RemoveEmp(emp_id):
     flash("Employee Successfully Removed")
     return render_template('remove-employee.html', name = removeTarget)
 
-@app.route("/updateemp", methods=['GET','POST'])
+@app.route("/templates/remove-employee.html/<emp_id>", methods=['GET','POST'])
 def UpdateEmp():
     emp_id= request.form['emp_id']
     emp_email = request.form['emp_email']
