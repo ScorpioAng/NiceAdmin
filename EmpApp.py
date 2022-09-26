@@ -363,7 +363,7 @@ def AddPayroll():
     payroll_salary = float(request.form['payroll_salary'])
     payroll_overtime = float(request.form['payroll_overtime'])
     epf = float(0.11)
-    socso = float(0.5)
+    socso = float(0.05)
 
     insert_sql = "INSERT INTO payroll(payroll_emp_id,payroll_emp_name,payroll_month,payroll_salary,payroll_overtime, payroll_netsalary) VALUES (%s, %s, %s, %s, %s, %s)"
     cursor = db_conn.cursor()
