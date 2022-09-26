@@ -106,7 +106,7 @@ def ReadPayroll():
     try:
         cursor.execute(read_sql)
         db_conn.commit()
-        data1 = cursor.fetchall()
+        data2 = cursor.fetchall()
 
 
     except Exception as e: 
