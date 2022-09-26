@@ -219,7 +219,7 @@ def SearchLeave(leave_id):
         row = cursor.fetchone() 
             
     except Exception as e: 
-          print(str(e))
+        print(str(e))
     finally:
         cursor.close()
     return render_template('update-leave.html',row = row)
@@ -305,14 +305,14 @@ def UpdateLeave(leave_id):
     cursor = db_conn.cursor()
             
     
-        try:
+    try:
 
-            cursor.execute(update_sql, (leave_date, leave_days, leave_reason, leave_id))
-            db_conn.commit()
+        cursor.execute(update_sql, (leave_date, leave_days, leave_reason, leave_id))
+        db_conn.commit()
 
-        except Exception as e:
-            return str(e)
-            cursor.close()
+    except Exception as e:
+        return str(e)
+        cursor.close()
     
     print("Update Succesfully")
     return render_template('update-leave-output.html', name = leave_id)
