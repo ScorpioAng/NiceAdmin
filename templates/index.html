@@ -204,6 +204,43 @@
     </div>
     </section>
 
+    <section class="section">
+      <div class="row">
+        <div flex="0 0 auto " width="100%">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Employees' Payrolls</h5>
+                <table class="table table-borderless">
+                  <thead>
+                    <tr>
+                      {% for header in headings2 %}
+                      <th>{{header}}</th>
+                      {% endfor %}
+                    </tr>
+                    {% for row in data2 %}
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <td>{{ row[0] }}</td> 
+                          <td>{{ row[1] }}</td>
+                          <td>{{ row[2] }}</td>
+                          <td>{{ row[3] }}</td>
+                          <td>{{ row[4] }}</td>
+                          <td>{{ row[5] }}</td>
+                          <td>{{ row[6] }}</td> 
+                      </tr>
+                      {% endfor %}
+                  </tbody>
+                </table>
+              
+            </div>
+          </div>
+
+        </div>
+    </div>
+    </section>
+
 
   </main><!-- End #main -->
 
