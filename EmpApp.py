@@ -208,7 +208,7 @@ def SearchEmp(emp_id):
     return render_template('update-employee.html',row = row)
 
 
-@app.route("/templates/update-employee.html/<leave_id>", methods=['GET'])
+@app.route("/templates/update-leave.html/<leave_id>", methods=['GET'])
 def SearchLeave(leave_id):
 
     search_sql =("SELECT * FROM leaveApp WHERE leave_id = %s")
