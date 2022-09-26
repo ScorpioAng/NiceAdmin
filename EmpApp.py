@@ -218,7 +218,7 @@ def SearchLeave(leave_id):
         db_conn.commit()
         row = cursor.fetchone() 
             
-         except Exception as e: 
+    except Exception as e: 
           print(str(e))
     finally:
         cursor.close()
