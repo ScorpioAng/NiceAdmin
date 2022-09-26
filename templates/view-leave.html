@@ -145,6 +145,7 @@
                       {% for header in headings1 %}
                       <th>{{header}}</th>
                       {% endfor %}
+                      <th>Action</th>
                     </tr>
                     {% for row in data1 %}
                   </thead>
@@ -157,6 +158,8 @@
                           <td>{{ row[4] }}</td>
                           <td>{{ row[5] }}</td> 
                           <td>{{ row[6] }}</td>
+                          <td><a href="/templates/remove-leave.html/{{row[0]}}">Delete Leave</a>
+                          </td>
                       </tr>
                       {% endfor %}
                   </tbody>
