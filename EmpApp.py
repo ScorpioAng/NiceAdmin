@@ -136,7 +136,7 @@ def RemoveLeave(leave_id):
         cursor.close()
 
     flash("Leave Successfully Removed")
-    return render_template('remove-employee.html', name = leave_id)    
+    return render_template('remove-leave.html', name = leave_id)    
 
 @app.route("/templates/update-employee.html/<emp_id>", methods=['GET'])
 def SearchEmp(emp_id):
