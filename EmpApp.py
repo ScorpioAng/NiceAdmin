@@ -152,7 +152,7 @@ def UpdateEmp(emp_id):
                 custombucket,
                 emp_resume_file_name_in_s3)
 
-            cursor.execute(update_sql, (emp_email, emp_name, emp_DoB, emp_contact, emp_department, emp_address, image_object_url, resume_object_url))
+            cursor.execute(update_sql, (emp_email, emp_name, emp_DoB, emp_contact, emp_department, emp_address, image_object_url, resume_object_url, emp_id))
             db_conn.commit()
 
         except Exception as e:
