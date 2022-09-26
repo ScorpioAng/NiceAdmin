@@ -208,6 +208,25 @@ def SearchEmp(emp_id):
     return render_template('update-employee.html',row = row)
 
 
+@app.route("/templates/update-employee.html/<leave_id>", methods=['GET'])
+def SearchLeave(leave_id):
+
+    search_sql =("SELECT * FROM leaveApp WHERE leave_id = %s")
+    cursor = db_conn.cursor()
+    try: 
+        cursor.execute(search_sql,leave_id)
+        db_conn.commit()
+        row = cursor.fetchone() 
+            
+    except Exception as e: 
+        print(str(e))
+    finally:
+        cursor.close()
+    return render_template('update-leave.html',row = row)
+
+
+
+
 @app.route("/templates/update-employee.html/<emp_id>", methods=['POST'])
 def UpdateEmp(emp_id):
     emp_email = request.form['emp_email']
@@ -275,6 +294,31 @@ def UpdateEmp(emp_id):
     
     print("Update Succesfully")
     return render_template('update-employee-output.html', name = emp_name)
+
+
+@app.route("/templates/update-employee.html/<leave_id>", methods=['POST'])
+def UpdateLeave(leave_id):
+    leave_date = request.form['leave_date']
+    leave_days = request.form['leave_days']
+    leave_reason = request.form['leave_reason']    
+    update_sql = ("UPDATE employee SET leave_date=%s, leave_days=%s, leave_reason=%s   WHERE leave_id=%s")
+    cursor = db_conn.cursor()
+            
+    
+        try:
+
+            cursor.execute(update_sql, (leave_date, leave_days, leave_reason, leave_id))
+            db_conn.commit()
+
+        except Exception as e:
+            return str(e)
+            cursor.close()
+    
+    print("Update Succesfully")
+    return render_template('update-leave-output.html', name = leave_id)
+
+
+
 
 @app.route("/templates/add-employee.html", methods=['GET'])
 def ViewAddEmp():
