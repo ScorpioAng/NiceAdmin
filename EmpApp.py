@@ -376,7 +376,7 @@ def AddPayroll():
             total_epf = total_salary * epf
             total_socso = total_salary * socso
             
-            payroll_netsalary = total_salary - float(totalepf) - float(totalsocso)
+            payroll_netsalary = total_salary - float(total_epf) - float(total_socso)
             payroll_netsalary = float(payroll_netsalary)
             print("Data inserted in MySQL RDS... ")
 
