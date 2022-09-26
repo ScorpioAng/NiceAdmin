@@ -378,8 +378,6 @@ def AddPayroll():
             
             payroll_netsalary = total_salary - float(totalepf) - float(totalsocso)
             payroll_netsalary = float(payroll_netsalary)
-
-        try:
             print("Data inserted in MySQL RDS... ")
 
             cursor.execute(insert_sql, (payroll_emp_id, payroll_emp_name, payroll_month, payroll_salary, payroll_overtime, payroll_netsalary))
