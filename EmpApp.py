@@ -120,13 +120,13 @@ def UpdateEmp(emp_id):
     elif emp_contact =="":
         return "Please enter Location"
     elif emp_department == "":
-        return "Please select an Image"
+        return "Please enter department"
     elif emp_address == "":
-        return "Please select an Image"
+        return "Please enter address"
     elif emp_image == "":
         return "Please select an Image"
     elif emp_resume == "":
-        return "Please select an Image"                
+        return "Please select an resume"                
     try:
         emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
         emp_resume_file_name_in_s3 = "emp-id-" + str(emp_id) + "_resume_file"
