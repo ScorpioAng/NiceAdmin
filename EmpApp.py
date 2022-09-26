@@ -356,7 +356,7 @@ def AddLeave():
 
 
 @app.route("/templates/add-payroll.html", methods=['POST'])
-def AddLeave():
+def AddPayroll():
     payroll_emp_id= request.form['payroll_emp_id']
     payroll_emp_name= request.form['payroll_emp_name']
     payroll_month = request.form['payroll_month']
