@@ -224,6 +224,8 @@ def SearchLeave(leave_id):
         cursor.close()
     return render_template('update-leave.html',row = row)
 
+
+
 @app.route("/templates/update-payroll.html/<payroll_id>", methods=['GET'])
 def SearchPayroll(payroll_id):
 
