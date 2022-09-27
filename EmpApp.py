@@ -232,7 +232,7 @@ def SearchPayroll(payroll_id):
     search_sql =("SELECT * FROM payroll WHERE payroll_id = %s")
     cursor = db_conn.cursor()
     try: 
-        cursor.execute(search_sql,payroll_emp_name)
+        cursor.execute(search_sql,payroll_id)
         db_conn.commit()
         row = cursor.fetchone() 
             
@@ -538,21 +538,6 @@ def AddPayroll():
 
     print("all modification done...")
     return render_template('add-payroll-output.html', name=payroll_emp_name, name1=payroll_netsalary)
-
-
-@app.route("/updateprofile/<empid>")
-def updateprofile(empid):
-    row = empid
-    select_sql = "SELECT * from employee WHERE emp_id = %s"
-    cursor = db_conn.cursor()
-    cursor.execute(select_sql, row)
-    row = cursor.fetchone()
-    return render_template('UpdateEmpOutput.html', row = row)
-
-@app.route("/removeprofile/<empid>")
-def removeprofile(empid):
-    id = empid
-    return render_template('RemoveEmp.html', id=id)
 
 
 if __name__ == '__main__':
