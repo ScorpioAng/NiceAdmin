@@ -363,7 +363,7 @@ def UpdatePayroll(payroll_emp_name):
         payroll_netsalary = total_salary - float(total_epf) - float(total_socso)
         payroll_netsalary = float(payroll_netsalary)        
 
-        cursor.execute(update_sql, (payroll_month, payroll_salary, payroll_overtime, payroll_netsalary, payrol_id))
+        cursor.execute(update_sql, (payroll_month, payroll_salary, payroll_overtime, payroll_netsalary, payroll_id))
         db_conn.commit()
 
     except Exception as e:
