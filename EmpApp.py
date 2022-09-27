@@ -224,10 +224,10 @@ def SearchLeave(leave_id):
         cursor.close()
     return render_template('update-leave.html',row = row)
 
-@app.route("/templates/update-payroll.html/<payroll_emp_name>", methods=['GET'])
-def SearchPayroll(payroll_emp_name):
+@app.route("/templates/update-payroll.html/<payroll_id>", methods=['GET'])
+def SearchPayroll(payroll_id):
 
-    search_sql =("SELECT * FROM payroll WHERE payroll_emp_name = %s")
+    search_sql =("SELECT * FROM payroll WHERE payroll_id = %s")
     cursor = db_conn.cursor()
     try: 
         cursor.execute(search_sql,payroll_emp_name)
@@ -335,9 +335,9 @@ def UpdateLeave(leave_id):
     return render_template('update-leave-output.html', name = leave_id)
 
 
-@app.route("/templates/update-payroll.html/<payroll_emp_name>", methods=['POST'])
-def UpdatePayroll(payroll_emp_name):
-    payroll_id = request.form['payroll_id']
+@app.route("/templates/update-payroll.html/<payroll_id>", methods=['POST'])
+def UpdatePayroll(payroll_id):
+    payroll_emp_name = request.form['payroll_emp_name']
     payroll_month = request.form['payroll_month']
     payroll_salary = float(request.form['payroll_salary'])
     payroll_overtime = float(request.form['payroll_overtime'])
