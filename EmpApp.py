@@ -337,7 +337,7 @@ def UpdateLeave(leave_id):
 
 @app.route("/templates/update-payroll.html/<payroll_emp_name>", methods=['POST'])
 def UpdatePayroll(payroll_emp_name):
-    payroll_id = request.form['payrol_id']
+    payroll_id = request.form['payroll_id']
     payroll_month = request.form['payroll_month']
     payroll_salary = float(request.form['payroll_salary'])
     payroll_overtime = float(request.form['payroll_overtime'])
