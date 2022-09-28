@@ -139,28 +139,33 @@ def RemoveEmp(emp_id):
         s3 = boto3.client('s3')
         s3.delete_object(Bucket= bucket, Key= emp_image_file_name_in_s3)
         s3.delete_object(Bucket= bucket, Key= emp_resume_file_name_in_s3)
-        # remove_sql =("DELETE FROM employee WHERE emp_id= %s")
+        final_remove_sql =("DELETE FROM employee WHERE emp_id= %s")
         remove_sql = ("DELETE t1, t2 FROM leaveApp as t1 INNER JOIN payroll as t2 on t1.leave_emp_id = t2.payroll_emp_id WHERE t1.leave_emp_id = %s")
-        cursor.execute(remove_sql,emp_id)
-        db_conn.commit()
 
-        # try: 
-        #     cursor.execute(remove_sql,emp_id)
-        #     db_conn.commit()
-        # except Exception as a:
-        #     return str(a)
-        #     #return render_template('remove-employee-fail.html')
+        try: 
+            cursor.execute(remove_sql,emp_id)
+            db_conn.commit()
+
+            try:
+                cursor.execute(finap_remove_sql, emp_id)
+                db_conn.commit()
+
+            except Exception as e: 
+                return str(e)
+
+        except Exception as e:
+            return str(e)
             
-        # finally:
-        #     cursor.close()
-
     except Exception as e: 
-        return (str(e))
+        return str(e)
+
     finally:
         cursor.close()
 
     flash("Employee Successfully Removed")
     return render_template('remove-employee.html', name = emp_id)
+
+
 
 @app.route("/templates/remove-leave.html/<leave_id>", methods=['GET','POST'])
 def RemoveLeave(leave_id):
