@@ -146,9 +146,9 @@ def RemoveEmp(emp_id):
         cursor.execute(remove_sql,emp_id)
         row =cursor.fetchone()
         if row:
-            print("Remove Succesfully")
+            print("Remove Unsuccessfully")
         else:
-            print("Remove Unsuccesfully")
+            print("Remove Succesfully")
         db_conn.commit()
 
     except Exception as e: 
