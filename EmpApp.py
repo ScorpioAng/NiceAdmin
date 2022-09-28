@@ -139,19 +139,23 @@ def RemoveEmp(emp_id):
         s3 = boto3.client('s3')
         s3.delete_object(Bucket= bucket, Key= emp_image_file_name_in_s3)
         s3.delete_object(Bucket= bucket, Key= emp_resume_file_name_in_s3)
-        remove_sql =("DELETE FROM employee WHERE emp_id= %s")
-        try: 
-            cursor.execute(remove_sql,emp_id)
-            db_conn.commit()
-        except Exception as a:
-            return render_template('remove-employee-fail.html')
-            
-        finally:
-            cursor.close()
+        # remove_sql =("DELETE FROM employee WHERE emp_id= %s")
+        remove_sql = ("DELETE t1, t2 , t3 FROM employee as t1 INNER JOIN leaveApp as t2 on t1.emp_id = t2.leave_emp_id INNER JOIN Payroll as t3 on t1.emp_id = t3.payroll_emp_id WHERE t1.emp_id = %s")
+        cursor.execute(remove_sql,emp_id)
+        db_conn.commit()
 
+        # try: 
+        #     cursor.execute(remove_sql,emp_id)
+        #     db_conn.commit()
+        # except Exception as a:
+        #     return str(a)
+        #     #return render_template('remove-employee-fail.html')
+            
+        # finally:
+        #     cursor.close()
 
     except Exception as e: 
-        print (str(e))
+        return (str(e))
     finally:
         cursor.close()
 
