@@ -143,7 +143,11 @@ def RemoveEmp(emp_id):
         s3.delete_object(Bucket= bucket, Key= emp_image_file_name_in_s3)
         s3.delete_object(Bucket= bucket, Key= emp_resume_file_name_in_s3)
         remove_sql =("DELETE FROM employee WHERE emp_id= %s")
-        cursor.execute(remove_sql,emp_id)
+        success=cursor.execute(remove_sql,emp_id)
+            if success:
+                print("Remove Succesfully")
+            else:
+                print("Remove Unsuccesfully")
         db_conn.commit()
 
     except Exception as e: 
