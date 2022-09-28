@@ -140,7 +140,7 @@ def RemoveEmp(emp_id):
         s3.delete_object(Bucket= bucket, Key= emp_image_file_name_in_s3)
         s3.delete_object(Bucket= bucket, Key= emp_resume_file_name_in_s3)
         # remove_sql =("DELETE FROM employee WHERE emp_id= %s")
-        remove_sql = ("DELETE t1, t2, FROM leaveApp as t1 INNER JOIN payroll as t2 on t1.leave_emp_id = t2.payroll_emp_id WHERE t1.leave_emp_id = %s")
+        remove_sql = ("DELETE t1, t2 FROM leaveApp as t1 INNER JOIN payroll as t2 on t1.leave_emp_id = t2.payroll_emp_id WHERE t1.leave_emp_id = %s")
         cursor.execute(remove_sql,emp_id)
         db_conn.commit()
 
