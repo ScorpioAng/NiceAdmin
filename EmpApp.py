@@ -34,7 +34,6 @@ headings2=("payroll_id","payroll_emp_id","payroll_emp_name","payroll_month","pay
 def home():
     read_sql  = "SELECT * FROM employee"
     cursor = db_conn.cursor()
-    print("testing")
 
     try:
         cursor.execute(read_sql)
@@ -49,7 +48,6 @@ def home():
     
     read_sql  = "SELECT * FROM leaveApp"
     cursor = db_conn.cursor()
-    print("testing")
 
     try:
         cursor.execute(read_sql)
@@ -81,7 +79,6 @@ def home():
 def ReadEmp():
     read_sql  = "SELECT * FROM employee"
     cursor = db_conn.cursor()
-    print("testing")
 
     try:
         cursor.execute(read_sql)
@@ -143,13 +140,15 @@ def RemoveEmp(emp_id):
         s3.delete_object(Bucket= bucket, Key= emp_image_file_name_in_s3)
         s3.delete_object(Bucket= bucket, Key= emp_resume_file_name_in_s3)
         remove_sql =("DELETE FROM employee WHERE emp_id= %s")
-        cursor.execute(remove_sql,emp_id)
-        row =cursor.fetchone()
-        if row:
-            print("Remove Unsuccessfully")
-        else:
-            print("Remove Succesfully")
-        db_conn.commit()
+        try: 
+            cursor.execute(remove_sql,emp_id)
+            db_conn.commit()
+        except Exception as a:
+            return render_template('remove-employee-fail.html')
+            
+        finally:
+            cursor.close()
+
 
     except Exception as e: 
         print (str(e))
