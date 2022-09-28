@@ -324,7 +324,7 @@ def UpdateEmp(emp_id):
     finally:
         cursor.close()
     
-    print("Update Succesfully")
+    print("Update Successfully")
     return render_template('update-employee-output.html', name = emp_name)
 
 
@@ -346,7 +346,7 @@ def UpdateLeave(leave_id):
         return str(e)
         cursor.close()
     
-    print("Update Succesfully")
+    print("Update Successfully")
     return render_template('update-leave-output.html', name = leave_id)
 
 
@@ -385,7 +385,7 @@ def UpdatePayroll(payroll_id):
         return str(e)
         cursor.close()
     
-    print("Update Succesfully")
+    print("Update Successfully")
     return render_template('update-payroll-output.html', name = payroll_emp_name, name1=payroll_netsalary)
 
 
