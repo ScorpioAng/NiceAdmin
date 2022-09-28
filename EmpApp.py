@@ -143,8 +143,9 @@ def RemoveEmp(emp_id):
         s3.delete_object(Bucket= bucket, Key= emp_image_file_name_in_s3)
         s3.delete_object(Bucket= bucket, Key= emp_resume_file_name_in_s3)
         remove_sql =("DELETE FROM employee WHERE emp_id= %s")
-        success=cursor.execute(remove_sql,emp_id)
-        if success:
+        cursor.execute(remove_sql,emp_id)
+        row =curs.fetchone()
+        if row:
             print("Remove Succesfully")
         else:
             print("Remove Unsuccesfully")
