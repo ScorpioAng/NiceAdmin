@@ -147,7 +147,7 @@ def RemoveEmp(emp_id):
             db_conn.commit()
 
             try:
-                cursor.execute(finap_remove_sql, emp_id)
+                cursor.execute(final_remove_sql, emp_id)
                 db_conn.commit()
 
             except Exception as e: 
